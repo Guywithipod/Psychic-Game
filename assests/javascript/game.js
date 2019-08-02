@@ -1,67 +1,48 @@
-const computerSongs = [oblivion, home, magnets, human];
+let wins = 0
 
-const letters = [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z,];
+let losses = 0
 
-const userGuessLower = userGuess.toLowerCase();
+let guessesleft = 9
 
-let guessedLetters = []
+const userWins = document.getElementById("user-wins");
 
-let winsCounter = 0
+const userLost = document.getElementById("user-losses");
 
-let lossCounter = 0
+const userGuessesLeft = document.getElementById("user-guesses-left");
 
-// Randomly chooses a choice from the options array. This is the Computer's guess.
-const computerSongs = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+const userChoose = document.getElementById("user-choose");
 
-// This function is run whenever the user presses a key.
-document.onkeyup = function (event) {
+let computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p","q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-    // Determines which key was pressed.
+document.onkeyup = function(event){
+
+    
     const userGuess = event.key;
+      
+    const computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-    // Randomly chooses a choice from the options array. This is the Computer's guess.
-const computerSongs = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    userChoose.textContent = "you choose: " + userGuess;
+    
 
-    // This will check the user guess and its something they already pressed it will be undefined and it should do nothing. Option 1
+    if (userGuess === computerGuess){
 
-    if (letters.indexOf(userGuessLower)) === -1 {
+        wins++;
+        userChoose.push(userGuess);
+    }
 
-    };
+    else {
+        guessesleft--;
+    }
 
-    // This is final bit of code where if they press the right keys they won and the song plays, the image of the album artwork comes up as well option 2
+    if (guessesleft === 0 ){
+        losses++;
+        
+    }
 
-    if (oblivion) {
-
-        if ((userGuess === "o") || (userGuess === "b") || (userGuess === "l") || (userGuess === "i") || (userGuess === "v") || (userGuess === "n")) {
-
-            const winsCounter = document.getElementById("winsCounter");
-        }
-
-
-    };
-
-    if (home) {
-
-        if ((userGuess === "h") || (userGuess === "o") || (userGuess === "m") || (userGuess === "e")) {
-
-        }
-
-    };
-
-    if (magnets) {
-
-        if ((userGuess === "m") || (userGuess === "a") || (userGuess === "n") || (userGuess === "g") || (userGuess === "e") || (userGuess === "t") || (userGuess === "s")) {
-
-        }
-    };
-
-    if (human) {
-
-        if ((userGuess === "h") || (userGuess === "u") || (userGuess === "m") || (userGuess === "a") || (userGuess === "n")) {
-
-        }
-
-    };
+    userWins.textContent = "wins: " + wins;
+    userLost.textContent = "losses: " + losses;
+    userChoose.textContent = "you choose: " + userGuess;
+    userGuessesLeft.textContent = "guesses left: " + guessesleft;
 
 
-
+};
